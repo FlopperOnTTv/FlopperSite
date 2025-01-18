@@ -147,31 +147,12 @@
             <div id="music-content">
                 <div id="music-border-left">|</div>
                 <div id="music-border-right">|</div>
-                <span id="play-button">♪ Click to play ♪</span>
-                <span id="now-playing" style="display: none;">Now playing: ./music/ilikethewayyoukissme.mp3</span>
+                <!-- Embed SoundCloud player -->
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" 
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/133763999&color=%23400000&inverse=false&auto_play=false&show_user=true">
+                </iframe>
             </div>
         </div>
     </div>
-
-    <script>
-        // Correct raw URL for GitHub audio file
-        const audio = new Audio('https://raw.githubusercontent.com/FlopperOnTTv/FlopperSite/main/song.mp3');
-
-        document.getElementById('play-button').addEventListener('click', function() {
-            audio.play().then(() => {
-                document.getElementById('play-button').style.display = 'none';
-                document.getElementById('now-playing').style.display = 'inline-block';
-            }).catch(error => {
-                console.error('Error playing audio:', error);
-                alert('Failed to play audio. Please check the console for more information.');
-            });
-        });
-
-        audio.addEventListener('error', function() {
-            console.error('Audio error:', audio.error);
-            console.log('Audio URL:', audio.src);
-            alert('Failed to load audio. Please check the console for more information.');
-        });
-    </script>
 </body>
 </html>
