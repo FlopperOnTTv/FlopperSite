@@ -131,12 +131,13 @@
 ██╔══╝  ██║     ██║   ██║██╔═══╝ ██╔═══╝ ██╔══╝  ██╔══██╗
 ██║     ███████╗╚██████╔╝██║     ██║     ███████╗██║  ██║
 ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝
-                                                          </pre>
+                                                         
+                </pre>
                 <div class="button-container">
                     <a href="https://t.me/floppertv" id="telegram-button" class="button" target="_blank">t.me/FlopperTv</a>
                     <a href="https://soon" id="twitter-button" class="button" target="_blank">soon</a>
                     <a href="https://www.youtube.com/@FlopperTv" id="github-button" class="button" target="_blank">My Youtube!</a>
-                    <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
+                   <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
                  </div>
             </div>
             <div class="image-container">
@@ -147,12 +148,30 @@
             <div id="music-content">
                 <div id="music-border-left">|</div>
                 <div id="music-border-right">|</div>
-                <!-- Embed SoundCloud player -->
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" 
-                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/673391579&color=%23400000&inverse=false&auto_play=true&show_user=false">
-                </iframe>
+                <span id="play-button">♪ Click to play ♪</span>
+                <span id="now-playing" style="display: none;">Now playing: ./music/ilikethewayyoukissme.mp3</span> <!-- Updated song name -->
             </div>
         </div>
     </div>
+
+    <script>
+        const audio = new Audio('https://drive.google.com/uc?export=download&id=1mBB-b5ZVHKOHVHBiSwny4pNOQkH0_CN1');
+
+        document.getElementById('play-button').addEventListener('click', function() {
+            audio.play().then(() => {
+                document.getElementById('play-button').style.display = 'none';
+                document.getElementById('now-playing').style.display = 'inline-block';
+            }).catch(error => {
+                console.error('Error playing audio:', error);
+                alert('Failed to play audio. Please check the console for more information.');
+            });
+        });
+
+        audio.addEventListener('error', function() {
+            console.error('Audio error:', audio.error);
+            console.log('Audio URL:', audio.src);
+            alert('Failed to load audio. Please check the console for more information.');
+        });
+    </script>
 </body>
 </html>
