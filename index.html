@@ -131,13 +131,12 @@
 ██╔══╝  ██║     ██║   ██║██╔═══╝ ██╔═══╝ ██╔══╝  ██╔══██╗
 ██║     ███████╗╚██████╔╝██║     ██║     ███████╗██║  ██║
 ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝
-                                                         
-                </pre>
+                                                          </pre>
                 <div class="button-container">
                     <a href="https://t.me/floppertv" id="telegram-button" class="button" target="_blank">t.me/FlopperTv</a>
                     <a href="https://soon" id="twitter-button" class="button" target="_blank">soon</a>
                     <a href="https://www.youtube.com/@FlopperTv" id="github-button" class="button" target="_blank">My Youtube!</a>
-                   <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
+                    <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
                  </div>
             </div>
             <div class="image-container">
@@ -149,13 +148,14 @@
                 <div id="music-border-left">|</div>
                 <div id="music-border-right">|</div>
                 <span id="play-button">♪ Click to play ♪</span>
-                <span id="now-playing" style="display: none;">Now playing: ./music/ilikethewayyoukissme.mp3</span> <!-- Updated song name -->
+                <span id="now-playing" style="display: none;">Now playing: ./music/ilikethewayyoukissme.mp3</span>
             </div>
         </div>
     </div>
 
     <script>
-        const audio = new Audio('https://github.com/FlopperOnTTv/FlopperSite/blob/main/song.mp3');
+        // Correct raw URL for GitHub audio file
+        const audio = new Audio('https://raw.githubusercontent.com/FlopperOnTTv/FlopperSite/main/song.mp3');
 
         document.getElementById('play-button').addEventListener('click', function() {
             audio.play().then(() => {
