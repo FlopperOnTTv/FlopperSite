@@ -114,6 +114,19 @@
             100% { transform: rotate(360deg); }
         }
 
+        .mantine-Slider-label {
+            display: none;
+        }
+        .mantine-Slider-track::before {
+            background: var(--textColorDarker);
+        }
+        .mantine-Slider-bar {
+            background-color: var(--textColor);
+        }
+        .mantine-Slider-thumb {
+            border: 0.15rem solid var(--containerColor);
+            box-shadow: var(--textColorDarker) 0px 5px 25px 0px;
+        }
     </style>
 </head>
 <body>
@@ -136,42 +149,4 @@
 
             <!-- Video player -->
             <video id="video" autoplay muted loop>
-                <source src="https://r2.guns.lol/c9e41ff7-1bb4-4c42-8be7-52b4eeecc921.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-
-            <!-- Loading spinner (hidden initially) -->
-            <div class="loading-spinner"></div>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Your Website</p>
-    </footer>
-
-    <script>
-        // Toggle mute/unmute function
-        function toggleMute() {
-            const video = document.getElementById('video');
-            const muteButton = document.getElementById('mute-button');
-
-            if (video.muted) {
-                video.muted = false; // Unmute the video
-                muteButton.textContent = "🔊"; // Change icon to "Unmute"
-            } else {
-                video.muted = true; // Mute the video
-                muteButton.textContent = "🔇"; // Change icon to "Mute"
-            }
-        }
-
-        // Hide loading spinner once the video is ready
-        const video = document.querySelector('video');
-        const spinner = document.querySelector('.loading-spinner');
-
-        video.addEventListener('canplay', () => {
-            spinner.style.display = 'none';
-        });
-    </script>
-
-</body>
-</html>
+                <source src="https://r2.guns.lol/c9e41ff7-1bb4-4c42-8be7-52b4eeecc921.mp4" type="vi
