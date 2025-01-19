@@ -63,12 +63,13 @@
             text-decoration: none;
             border: 2px solid #F8F8F2;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
         }
 
         .button:hover {
             background-color: #F8F8F2;
             color: #000;
+            box-shadow: 0 0 15px 5px rgba(255, 165, 0, 0.7), 0 0 25px 10px rgba(128, 0, 128, 0.5);
         }
 
         .image-container {
@@ -101,11 +102,8 @@
     </style>
 </head>
 <body>
-    <!-- Video Background with audio -->
-    <video id="background-video" autoplay loop>
-        <source src="https://raw.githubusercontent.com/FlopperOnTTv/FlopperSite/main/i%20like%20the%20way%20you%20kiss%20me%201080.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <!-- YouTube Video Background -->
+    <iframe id="background-video" src="https://www.youtube.com/embed/16iKzV6e9Pk?autoplay=1&loop=1&playlist=16iKzV6e9Pk&controls=0&showinfo=0&autohide=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
     <div id="main-content">
         <div class="content">
