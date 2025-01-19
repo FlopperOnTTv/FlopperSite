@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flopper Site</title>
     <style>
-        /* Your existing CSS styles */
         body, html {
             margin: 0;
             padding: 0;
@@ -15,10 +14,99 @@
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             overflow: hidden;
         }
-        /* ...rest of your CSS... */
+
+        /* Video background styling */
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .text-content {
+            margin-bottom: 20px;
+        }
+
+        #ascii-art {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            color: #F8F8F2;
+            text-decoration: none;
+            border: 2px solid #F8F8F2;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #F8F8F2;
+            color: #000;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .anime-girl {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #music-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #music-content {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+
+        #play-button, #now-playing {
+            color: #F8F8F2;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <!-- Video Background with audio -->
+    <video id="background-video" autoplay loop>
+        <source src="https://raw.githubusercontent.com/FlopperOnTTv/FlopperSite/main/i%20like%20the%20way%20you%20kiss%20me%201080.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <div id="main-content">
         <div class="content">
             <div class="text-content">
@@ -29,14 +117,13 @@
 ██╔══╝  ██║     ██║   ██║██╔═══╝ ██╔═══╝ ██╔══╝  ██╔══██╗
 ██║     ███████╗╚██████╔╝██║     ██║     ███████╗██║  ██║
 ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝
-                                                         
                 </pre>
                 <div class="button-container">
                     <a href="https://t.me/floppertv" id="telegram-button" class="button" target="_blank">t.me/FlopperTv</a>
                     <a href="https://soon" id="twitter-button" class="button" target="_blank">soon</a>
                     <a href="https://www.youtube.com/@FlopperTv" id="github-button" class="button" target="_blank">My Youtube!</a>
-                   <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
-                 </div>
+                    <a href="https://discordlookup.com/user/1079429643070873740" id="discord-button" class="button" target="_blank">My Discord</a>
+                </div>
             </div>
             <div class="image-container">
                 <img src="anime_girl.png" alt="Anime girl" class="anime-girl">
