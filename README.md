@@ -1,0 +1,1 @@
+Please don't copy site too poor to buy host :< flopper.site
