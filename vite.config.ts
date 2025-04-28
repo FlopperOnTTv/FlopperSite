@@ -6,9 +6,17 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  build: {
+    modulePreload: true,
+    target: 'esnext',
+    minify: 'esbuild'
+  },
   server: {
     headers: {
-      'Content-Type': 'application/javascript',
+      'Content-Type': 'text/javascript',
     },
-  },
+    fs: {
+      strict: true
+    }
+  }
 });
