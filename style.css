@@ -1,0 +1,424 @@
+:root {
+  --primary-color: #0a11f5;
+  --text-color: #ffffff;
+  --bg-color: #000000;
+  --card-bg: rgba(0, 0, 0, 0.5);
+  --card-border: rgba(10, 17, 245, 0.3);
+  --card-hover-border: rgba(10, 17, 245, 0.8);
+  --text-secondary: #cccccc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  padding: 1rem;
+  transition: all 0.3s;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.navbar.scrolled {
+  padding: 0.75rem 1rem;
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  text-shadow: 0 0 2px #fff, 0 0 4px var(--primary-color), 0 0 6px var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-color);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.github-link {
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.github-link:hover {
+  color: var(--primary-color);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+}
+
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+  background-repeat: repeat;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.neon-text {
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 10px var(--primary-color),
+    0 0 20px var(--primary-color),
+    0 0 30px var(--primary-color),
+    0 0 40px var(--primary-color);
+  animation: pulsate 2s infinite alternate;
+}
+
+@keyframes pulsate {
+  100% {
+    text-shadow: 
+      0 0 20px var(--primary-color),
+      0 0 35px var(--primary-color),
+      0 0 50px var(--primary-color),
+      0 0 65px var(--primary-color);
+  }
+  0% {
+    text-shadow: 
+      0 0 10px var(--primary-color),
+      0 0 25px var(--primary-color),
+      0 0 40px var(--primary-color),
+      0 0 55px var(--primary-color);
+  }
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-sections {
+  max-width: 1000px;
+  margin: -200px auto 0;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.featured-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  color: white;
+  transition: border-color 0.3s;
+}
+
+.featured-card:hover {
+  border-color: var(--card-hover-border);
+}
+
+.featured-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.featured-card h2 {
+  font-family: 'Luckiest Guy', cursive;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.featured-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.card-action {
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.featured-card:hover .card-action {
+  transform: translateX(4px);
+}
+
+.content {
+  padding-top: 80px;
+  min-height: calc(100vh - 200px);
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
+}
+
+.page-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 10px var(--primary-color),
+    0 0 20px var(--primary-color);
+}
+
+.about-section,
+.projects-section,
+.shop-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.shop-section {
+  text-align: center;
+}
+
+.about-description,
+.projects-description,
+.shop-description {
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.experience-grid,
+.projects-grid,
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.experience-card,
+.project-card,
+.product-card {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--card-border);
+  transition: border-color 0.3s;
+}
+
+.experience-card:hover,
+.project-card:hover,
+.product-card:hover {
+  border-color: var(--card-hover-border);
+}
+
+.experience-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.experience-card h2,
+.project-card h2,
+.product-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.experience-card p,
+.project-card p,
+.product-card p {
+  color: var(--text-secondary);
+}
+
+.tech-stack {
+  margin: 1rem 0;
+}
+
+.tech-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(10, 17, 245, 0.1);
+  color: var(--primary-color);
+  border-radius: 1rem;
+  margin: 0.25rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--card-border);
+}
+
+.project-link,
+.product-link {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: transform 0.3s;
+}
+
+.project-link:hover,
+.product-link:hover {
+  transform: translateX(4px);
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  margin: 2rem auto;
+  font-size: 1.25rem;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.cta-button .icon {
+  margin-right: 0.5rem;
+}
+
+.product-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(10, 17, 245, 0.1);
+  color: var(--primary-color);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--card-border);
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 1rem 0;
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+footer {
+  background: black;
+  border-top: 1px solid var(--card-border);
+  padding: 2rem;
+  color: white;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand h3 {
+  font-family: 'Luckiest Guy', cursive;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 2px #fff, 0 0 4px var(--primary-color), 0 0 6px var(--primary-color);
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--card-border);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
