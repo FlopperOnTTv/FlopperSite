@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply antialiased;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes boot-fade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes logo-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(150, 150, 150, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(150, 150, 150, 0.8); }
+  }
+
+  @keyframes slide-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.6s ease-out forwards;
+  }
+
+  .ps2-boot {
+    animation: boot-fade 0.8s ease-out;
+  }
+
+  .ps2-logo {
+    animation: logo-pulse 2s ease-in-out infinite;
+  }
+
+  .ps2-panel {
+    background: linear-gradient(135deg, rgba(80, 80, 80, 0.15) 0%, rgba(80, 80, 80, 0.25) 100%);
+    border: 2px solid rgba(150, 150, 150, 0.4);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .ps2-card {
+    background: linear-gradient(135deg, rgba(80, 80, 80, 0.1) 0%, rgba(80, 80, 80, 0.18) 100%);
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: slide-up 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .ps2-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(150, 150, 150, 0.25);
+    background: linear-gradient(135deg, rgba(80, 80, 80, 0.2) 0%, rgba(80, 80, 80, 0.28) 100%);
+  }
+
+  .ps2-card-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ps2-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(150, 150, 150, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .ps2-card:hover::before {
+    left: 100%;
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(150, 150, 150, 0.6), transparent);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, rgba(80, 80, 80, 0.1) 0%, rgba(80, 80, 80, 0.15) 100%);
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    border-radius: 8px;
+    color: rgba(150, 150, 150, 0.7);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: monospace;
+  }
+
+  .nav-button:hover {
+    border-color: rgba(150, 150, 150, 0.6);
+    color: rgba(150, 150, 150, 0.95);
+    background: linear-gradient(135deg, rgba(80, 80, 80, 0.2) 0%, rgba(80, 80, 80, 0.25) 100%);
+    box-shadow: 0 0 20px rgba(150, 150, 150, 0.2);
+  }
+
+  .nav-active {
+    border-color: rgba(150, 150, 150, 0.8);
+    color: #969696;
+    background: linear-gradient(135deg, rgba(150, 150, 150, 0.25) 0%, rgba(150, 150, 150, 0.15) 100%);
+    box-shadow: 0 0 25px rgba(150, 150, 150, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}

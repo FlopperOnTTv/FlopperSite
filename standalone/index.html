@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flppr Site</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="min-h-screen bg-black text-white overflow-hidden relative">
+        <nav class="border-b border-[#333333] sticky top-0 z-50 bg-black/95 backdrop-blur">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <span class="font-bold text-lg">Flopper</span>
+                <div class="flex gap-6">
+                    <button class="text-sm font-mono text-[#969696] hover:text-white transition-colors nav-home">
+                        [ Home ]
+                    </button>
+                    <button class="text-sm font-mono text-[#969696] hover:text-white transition-colors nav-designs">
+                        [ Designs ]
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="scanline"></div>
+
+        <div class="container mx-auto px-6 py-12 relative z-10">
+            <!-- Header -->
+            <div class="mb-12 ps2-boot">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-br from-[#808080] to-[#5a5a5a] rounded-lg flex items-center justify-center shadow-lg shadow-[#808080]/50 ps2-logo">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-bold mb-2">
+                            <span class="code-wrapper">Flopper</span>
+                        </h1>
+                        <div class="flex items-center gap-2 text-[#969696] text-sm font-mono">
+                            <span class="w-2 h-2 bg-[#969696] rounded-full animate-pulse"></span>
+                            <span class="typing-text">System Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="home-content" style="opacity: 0; transform: translateY(1rem); transition: all 0.7s ease-out;">
+                <div class="mb-6 flex items-center gap-3">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#969696] to-transparent"></div>
+                    <h2 class="text-xl font-bold text-[#969696] font-mono">[ ABOUT ]</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#969696] to-transparent"></div>
+                </div>
+
+                <div class="ps2-panel p-6 mb-8">
+                    <div class="flex items-start gap-3 mb-4">
+                        <span class="text-[#969696] font-mono text-sm mt-1">&gt;_</span>
+                        <p class="text-gray-300 leading-relaxed">
+                            Hey there! I'm a passionate console modder and designer who lives for breathing new life into classic gaming hardware.
+                            There's something special about taking a PS1, PS2, PS3, PSP, PSVita, Wii, DS, Xbox 360, and modern consoles like PS4, then unlocking their full potential through custom firmware, hardware mods, and creative enhancements.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-[#969696] font-mono text-sm mt-1">&gt;_</span>
+                        <p class="text-gray-300 leading-relaxed">
+                            When I'm not tinkering with hardware, I'm crafting beautiful user interfaces and experiences.
+                            Design isn't just what it looks like—it's how it works, and I love making both aspects shine.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Audio Section - Next to About -->
+                <div class="max-w-2xl mx-auto mb-8">
+                    <div class="ps2-panel p-4">
+                        <audio id="audioPlayer" crossorigin="anonymous"></audio>
+
+                        <div class="mb-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <svg class="w-4 h-4 text-[#969696]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.414a2 2 0 001.414.586H7a7 7 0 007-7v-.5a.5.5 0 00-.5-.5H14a1 1 0 00-1 1v.5a5 5 0 11-5 5 .5.5 0 00-.5.5v1.086a2 2 0 00.586 1.414z"></path>
+                                </svg>
+                                <p class="text-sm font-mono text-[#969696] truncate flex-1" id="trackName">
+                                    Loading...
+                                </p>
+                                <span class="text-xs text-gray-500 font-mono" id="trackCounter">
+                                    0/0
+                                </span>
+                            </div>
+
+                            <div class="relative bg-[#1a1a1a] rounded h-1.5 mb-2 cursor-pointer group">
+                                <div
+                                    class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#5552F7] to-[#7774FF] rounded transition-all"
+                                    id="progressBar"
+                                    style="width: 0%"
+                                ></div>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="0"
+                                    value="0"
+                                    id="progressSlider"
+                                    class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                                />
+                            </div>
+
+                            <div class="flex justify-between text-xs text-gray-500 font-mono mb-4">
+                                <span id="currentTime">0:00</span>
+                                <span id="duration">0:00</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3">
+                            <button
+                                id="playBtn"
+                                class="p-2 rounded-lg bg-[#5552F7]/20 hover:bg-[#5552F7]/40 transition-colors text-[#5552F7] hover:text-[#7774FF]"
+                                aria-label="Play"
+                            >
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </button>
+
+                            <button
+                                id="nextBtn"
+                                class="p-2 rounded-lg bg-[#5552F7]/20 hover:bg-[#5552F7]/40 transition-colors text-[#5552F7] hover:text-[#7774FF]"
+                                aria-label="Next track"
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7m0 0l-7 7m7-7H6"></path>
+                                </svg>
+                            </button>
+
+                            <span class="text-xs text-gray-500 font-mono ml-auto" id="trackCount">
+                                0 tracks
+                            </span>
+                        </div>
+
+                        <div class="mt-4 text-center text-xs text-gray-400 font-mono" id="playerStatus">
+                            Enter your GitHub repo in config.js
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specialties Section -->
+            <div class="home-content" style="opacity: 0; transform: translateY(1rem); transition: all 0.7s ease-out; transition-delay: 0.3s;">
+                <div class="mb-6 flex items-center gap-3">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent"></div>
+                    <h2 class="text-xl font-bold text-[#333333] font-mono">[ SPECIALTIES ]</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-12">
+                    <div class="ps2-card" style="animation-delay: 0ms;">
+                        <div class="ps2-card-inner">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-[#5552F7]/10 rounded-lg group-hover:bg-[#5552F7]/20 transition-colors">
+                                    <svg class="w-6 h-6 text-[#5552F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-bold text-[#7774FF]">Console Modding</h3>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed">Expert in modding PS1, PS2, PS3, PS4, PSP, PSVita, Wii, DS, Xbox 360, and various retro consoles. Custom firmware, hardware modifications, and system optimizations.</p>
+                        </div>
+                    </div>
+
+                    <div class="ps2-card" style="animation-delay: 200ms;">
+                        <div class="ps2-card-inner">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-[#5552F7]/10 rounded-lg group-hover:bg-[#5552F7]/20 transition-colors">
+                                    <svg class="w-6 h-6 text-[#5552F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2V3m-6 4v6m4-6v6"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-bold text-[#7774FF]">Hardware Hacking</h3>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed">Deep understanding of console architecture, chip modding, region unlocking, and pushing hardware beyond factory limitations.</p>
+                        </div>
+                    </div>
+
+                    <div class="ps2-card" style="animation-delay: 400ms;">
+                        <div class="ps2-card-inner">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-[#5552F7]/10 rounded-lg group-hover:bg-[#5552F7]/20 transition-colors">
+                                    <svg class="w-6 h-6 text-[#5552F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.5a2 2 0 00-1 .268m-4 0a2 2 0 00-1-.268H5a2 2 0 00-2 2v4a2 2 0 002 2m13-6h.01"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-bold text-[#7774FF]">Design Mastery</h3>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed">Creating beautiful, functional interfaces and experiences. Combining technical skills with aesthetic excellence.</p>
+                        </div>
+                    </div>
+
+                    <div class="ps2-card" style="animation-delay: 600ms;">
+                        <div class="ps2-card-inner">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-[#5552F7]/10 rounded-lg group-hover:bg-[#5552F7]/20 transition-colors">
+                                    <svg class="w-6 h-6 text-[#5552F7]" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-bold text-[#7774FF]">Modern Console Expertise</h3>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed">Specializing in PS3 and PS4 modding, including CFW installation, homebrew development, and advanced jailbreak techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Discord Status -->
+            <div class="home-content" style="opacity: 0; transform: translateY(1rem); transition: all 0.7s ease-out; transition-delay: 0.5s;">
+                <div class="flex justify-center mb-6">
+                    <img
+                        src="https://lanyard.cnrad.dev/api/1079429643070873740?hideDecoration=true&hideStatus=true&hideBadges=true&theme=dark"
+                        alt="Discord Status"
+                        class="rounded-lg max-w-sm w-full"
+                    />
+                </div>
+
+                <div class="ps2-panel p-4 max-w-2xl mx-auto">
+                    <div class="flex items-center gap-2 text-xs font-mono text-gray-400">
+                        <span class="text-green-400">●</span>
+                        <span>Memory Card (8MB) in slot 1</span>
+                        <span class="ml-auto text-[#969696]">Ready to mod</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Designs Page (hidden by default) -->
+            <div id="designsPage" style="display: none;">
+                <div class="mb-6 flex items-center gap-3">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#969696] to-transparent"></div>
+                    <h2 class="text-xl font-bold text-[#969696] font-mono">[ DESIGNS ]</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#969696] to-transparent"></div>
+                </div>
+                <p class="text-gray-300 text-center">Design gallery coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
