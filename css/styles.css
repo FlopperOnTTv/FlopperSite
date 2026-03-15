@@ -1,0 +1,247 @@
+/* Reset default styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    background-color: black;
+}
+
+/* Custom cursor */
+.custom-cursor {
+    cursor: url('../images/pointer.png'), auto !important;
+}
+
+/* Terminal styles */
+#terminal {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    width: 600px;
+    height: 400px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-radius: 10px;
+    z-index: 1000;
+    border: 2px solid #4d4d4d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 600px) {
+    #terminal {
+        max-width: 90%;
+    }
+}
+
+/* Terminal header */
+#terminal-header {
+    background-color: #2d2d2d;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    transition: background-color 0.3s;
+}
+
+    #terminal-header:hover {
+        background-color: #333333;
+    }
+
+#terminal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.terminal-button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .terminal-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+#close-button {
+    background-color: #FF5F57;
+}
+
+#minimize-button {
+    background-color: #FFBD2E;
+}
+
+#maximize-button {
+    background-color: #28CA42;
+}
+
+/* Terminal content */
+#terminal-content {
+    padding: 20px;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    user-select: none;
+}
+
+#terminal-text {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+/* Video background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+    /* Scanline effect */
+    #video-background::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient( to bottom, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 2px );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+/* Video */
+#myVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Positioning helpers */
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/* Profile card */
+#blurred-box {
+  position: absolute; /* Position relative to the closest positioned ancestor */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset to perfectly center */
+  width: 30%; /* Adjust width as needed */
+  height: 40%; /* Adjust height as needed */
+  background-color: rgba(255, 255, 255, 0); /* Transparent background */
+  border-radius: 20px; /* Rounded corners */
+  border: 2px solid rgba(255, 255, 255, 0); /* Dark border with transparency */
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.5); /* Slightly blurred shadow */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  z-index: 1; /* Lower z-index to keep it in the background */
+  padding: 20px; /* Add padding */
+  text-align: center; /* Center text horizontally */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+#blurred-box:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Semi-transparent background on hover */
+}
+
+/* Profile picture inside the box */
+#blurred-box img {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Adjust size as needed */
+  border-radius: 10%; /* Rounded corners */
+  margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+/* Links */
+.links {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    z-index: 1001;
+}
+
+    .links a {
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+        color: #ffffff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        .links a:hover {
+            color: #ff00ff;
+            text-decoration: underline;
+        }
+
+        .links a i {
+            margin-right: 5px;
+            font-size: 24px;
+        }
+
+/* User description */
+.user-description {
+    margin-bottom: 20px;
+}
+
+    .user-description p {
+        margin: 0;
+        padding: 10px;
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 10px;
+    }
+
+/* Overlay (Click to Enter screen) */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    font-size: 24px;
+    z-index: 1000;
+    transition: opacity 0.4s ease;
+}
+
+/* Enter text */
+#enter-text {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    text-shadow: 0 0 10px rgba(138,43,226,0.8), 0 0 20px rgba(138,43,226,0.7);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
