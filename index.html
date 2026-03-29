@@ -1,69 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flppr</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: black;
-    }
-    video#bgVideo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: -1;
-      transform: translate(-50%, -50%);
-      background-size: cover;
-    }
-    audio#bgAudio {
-      display: none;
-    }
-  </style>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css"> 
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="images/default.ico">
+
+
 </head>
-<body>
-
-  <!-- Background Video -->
-  <video id="bgVideo" autoplay muted loop playsinline>
-    <source src="media/default.mp4" type="video/mp4">
-  </video>
-
-  <!-- Background Music -->
-  <audio id="bgAudio" loop>
-    <source src="media/default.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Your original click-to-enter elements -->
-  <div id="clickToEnterContainer">
-    <h1>Welcome to Flppr!</h1>
-    <button id="enterButton">Click to Enter</button>
+<body class="custom-cursor">
+  <div id="video-background">
+    <video id="myVideo" muted loop>
+      <source src="media/default.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
   </div>
 
-  <!-- Keep your original click-to-enter script untouched -->
-  <script src="originalClickToEnter.js"></script> <!-- Whatever file has your animation -->
+  <div id="overlay">
+    <div id="enter-text">Click to Enter</div>
+  </div>
 
-  <script>
-    // Start audio on first user click without changing your original click behavior
-    const enterButton = document.getElementById('enterButton');
-    const bgAudio = document.getElementById('bgAudio');
-
-    enterButton.addEventListener('click', () => {
-      bgAudio.play().catch(() => {});
-      // Call your original function if it exists (animation stays)
-      if (typeof clickToEnter === 'function') {
-        clickToEnter();
-      }
-    });
-  </script>
-
+  <div id="audio-background">
+    <audio id="myAudio" loop>
+      <source src="media/default.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Tag nicht.
+    </audio>
+  </div>
 </body>
-</html>
+
+  <div id="blurred-box">
+    <img src="images/default.jpg" alt="Profile Picture">
+    <p id="username" style="color: white; font-weight: bold; font-size: large;">flopper</p>
+    <div class="user-description">
+      <p id="user-description" style="color: white;">i do cool shi</p>
+    </div>
+    <div class="links">
+      <a href="https://discordlookup.com/user/1079429643070873740" target="_blank">
+        <i class="fab fa-discord"></i>
+      </a> 
+      <a href="https://github.com/FlopperOnTTv" target="_blank">
+        <i class="fab fa-github"></i> 
+      </a> 
+      <a href="https://www.youtube.com/@FlopperTv" target="_blank">
+        <i class="fa-brands fa-youtube"></i>
+      </a> 
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/title.js"></script>
+
+
+</body></html>
