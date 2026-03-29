@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flppr</title>
   <style>
-    /* Fullscreen video background */
     html, body {
       margin: 0;
       padding: 0;
@@ -37,7 +36,6 @@
       height: 100%;
       color: white;
       text-align: center;
-      backdrop-filter: brightness(0.5);
     }
     button.enter-btn {
       padding: 12px 24px;
@@ -59,13 +57,13 @@
 
   <!-- Background Video -->
   <video id="bgVideo" autoplay muted loop playsinline>
-    <source src="default.mp4" type="video/mp4">
+    <source src="media/default.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
   <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="default.mp3" type="audio/mpeg">
+  <audio id="bgAudio" loop>
+    <source src="media/default.mp3" type="audio/mpeg">
     Your browser does not support HTML5 audio.
   </audio>
 
@@ -73,14 +71,20 @@
   <div class="overlay">
     <h1>Welcome to Flppr!</h1>
     <p>Click below to enter the site</p>
-    <button class="enter-btn" onclick="enterSite()">Click to Enter</button>
+ 
+    <button class="enter-btn" onclick="originalClickFunction()">Click to Enter</button>
   </div>
 
   <script>
-    function enterSite() {
-      // Replace this with your actual navigation or action
-      alert("Site Entered!"); 
-      // Example: window.location.href = "main.html";
+
+    function originalClickFunction() {
+      // click to enter thingy
+      // example placeholder:
+      alert("Original Click to Enter behavior");
+      
+      // start audio safely on user click
+      const audio = document.getElementById('bgAudio');
+      audio.play().catch(() => console.log('Audio autoplay blocked'));
     }
   </script>
 
