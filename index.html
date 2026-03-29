@@ -3,113 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flopper</title>
+    <title>flopper | elite</title>
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="icon" type="image/x-icon" href="images/default.ico">
-
     <style>
-        /* 1. THE FOUNDATION - No more white screens */
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000; /* Force black background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: #000;
             overflow: hidden;
             color: white;
+            perspective: 1000px;
         }
-
-        /* 2. THE OVERLAY - High Z-index so you can actually click it */
+        #particles-js {
+            position: absolute;
+            width: 100%; height: 100%;
+            z-index: 2;
+        }
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
             cursor: pointer;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
         }
-
         #enter-text {
-            font-size: 1.5rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            font-family: monospace;
+            font-size: 1.2rem;
+            letter-spacing: 10px;
+            animation: pulse 2s infinite;
         }
-
-        /* 3. THE VIDEO - Covers everything behind the box */
+        @keyframes pulse { 0%, 100% { opacity: 1; text-shadow: 0 0 10px #fff; } 50% { opacity: 0.2; } }
         #video-background {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1;
+            filter: brightness(0.3);
         }
-
-        video {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0.6; /* Makes it look cleaner/darker */
-        }
-
-        /* 4. THE COOL SHI - Floating/Drifting Profile Box */
-        #blurred-box {
+        video { width: 100%; height: 100%; object-fit: cover; }
+        #float-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
+            animation: drift 5s ease-in-out infinite;
+            display: none;
+        }
+        @keyframes drift {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-15px); }
+        }
+        #blurred-box {
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            opacity: 0; /* Starts invisible */
-            transition: opacity 1.5s ease;
-            
-            /* The Animation */
-            animation: float 6s ease-in-out infinite;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 50px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out, opacity 1s ease;
+            opacity: 0;
         }
-
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
-            33% { transform: translate(-50%, -50%) translateY(-15px) rotate(1deg); }
-            66% { transform: translate(-50%, -50%) translateY(5px) rotate(-1deg); }
-            100% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+        #username {
+            font-size: 2.5rem;
+            font-weight: 900;
+            cursor: crosshair;
+            transition: 0.1s;
         }
-
+        #username:hover {
+            animation: glitch 0.2s infinite;
+            color: #0ff;
+            text-shadow: 2px 0 #f0f, -2px 0 #0ff;
+        }
+        @keyframes glitch {
+            0% { transform: translate(2px, 1px); }
+            25% { transform: translate(-1px, -2px); }
+            50% { transform: translate(-2px, 1px); }
+            75% { transform: translate(1px, 2px); }
+            100% { transform: translate(-1px, -1px); }
+        }
         #blurred-box img {
-            width: 120px;
-            height: 120px;
+            width: 110px; height: 110px;
             border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transform: translateZ(60px);
         }
-
         .links a {
             color: white;
             font-size: 1.5rem;
             margin: 0 10px;
-            text-decoration: none;
             transition: 0.3s;
+            display: inline-block;
+            transform: translateZ(40px);
         }
-
-        .links a:hover {
-            color: #aaa;
-            text-shadow: 0 0 10px white;
-        }
+        .links a:hover { transform: translateZ(50px) scale(1.3); filter: drop-shadow(0 0 10px #fff); }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
-    <div id="overlay">
-        <div id="enter-text">Click to Enter</div>
-    </div>
+    <div id="overlay"><div id="enter-text">Click to Enter</div></div>
 
     <div id="video-background">
         <video id="myVideo" loop playsinline muted>
@@ -117,67 +117,100 @@
         </video>
     </div>
 
+    <div id="particles-js"></div>
+
     <audio id="myAudio" loop>
         <source src="media/default.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="blurred-box">
-        <img src="images/default.jpg" alt="Profile Picture">
-        <p id="username" style="font-weight: bold; font-size: 1.5rem; margin-bottom: 5px;">flopper</p>
-        <div class="user-description">
-            <p style="color: #ccc; margin-bottom: 20px;">i do cool shi</p>
-        </div>
-        <div class="links">
-            <a href="https://discordlookup.com/user/1079429643070873740" target="_blank"><i class="fab fa-discord"></i></a> 
-            <a href="https://github.com/FlopperOnTTv" target="_blank"><i class="fab fa-github"></i></a> 
-            <a href="https://www.youtube.com/@FlopperTv" target="_blank"><i class="fa-brands fa-youtube"></i></a> 
+    <div id="float-wrapper">
+        <div id="blurred-box">
+            <img src="images/default.jpg" alt="pfp">
+            <p id="username">flopper</p>
+            <div class="user-description">
+                <p style="color: #666; margin-top: 10px;">i do cool shi</p>
+            </div>
+            <div class="links">
+                <a href="https://discordlookup.com/user/1079429643070873740" target="_blank"><i class="fab fa-discord"></i></a> 
+                <a href="https://github.com/FlopperOnTTv" target="_blank"><i class="fab fa-github"></i></a> 
+                <a href="https://www.youtube.com/@FlopperTv" target="_blank"><i class="fa-brands fa-youtube"></i></a> 
+            </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = document.getElementById("myAudio");
-            const video = document.getElementById("myVideo");
-            const overlay = document.getElementById("overlay");
-            const box = document.getElementById("blurred-box");
-            const enterText = document.getElementById("enter-text");
-            let dotCount = 0;
+        const audio = document.getElementById("myAudio");
+        const video = document.getElementById("myVideo");
+        const overlay = document.getElementById("overlay");
+        const box = document.getElementById("blurred-box");
+        const wrapper = document.getElementById("float-wrapper");
+        const enterText = document.getElementById("enter-text");
 
-            // 1. Initial Setup
-            audio.volume = 0.2;
+        audio.volume = 0.2;
 
-            // 2. Animated Dots
-            setInterval(() => {
-                dotCount = (dotCount + 1) % 4;
-                enterText.textContent = `Click to Enter${'.'.repeat(dotCount)}`;
-            }, 500);
-
-            // 3. The Big Moment: Click to Start
-            overlay.addEventListener('click', function() {
-                // Play media (Crucial: Video starts muted to ensure it plays, we can unmute it if needed)
-                video.play().catch(e => console.log("Video Play Error:", e));
-                audio.play().catch(e => console.log("Audio Play Error:", e));
-                
-                // Hide overlay
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    // Reveal the profile box with a fade
-                    box.style.opacity = '1';
-                }, 800);
-            });
-
-            // 4. Tab Visibility Fix (Pause when switching tabs)
-            document.addEventListener("visibilitychange", () => {
-                if (document.hidden) {
-                    video.pause();
-                    audio.pause();
-                } else if (overlay.style.display === 'none') {
-                    video.play();
-                    audio.play();
-                }
-            });
+        document.addEventListener("keydown", function(e) {
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 73)) {
+                return false;
+            }
         });
+
+        document.onkeydown = function(e) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        }
+
+        overlay.addEventListener('click', () => {
+            video.play();
+            audio.play();
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                wrapper.style.display = 'block';
+                setTimeout(() => { box.style.opacity = '1'; }, 100);
+            }, 1000);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if(overlay.style.display === 'none') {
+                let xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+                let yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+                box.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 2 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1 }
+            },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "repulse" } } }
+        });
+
+        let dots = 0;
+        setInterval(() => {
+            dots = (dots + 1) % 4;
+            enterText.textContent = "Click to Enter" + ".".repeat(dots);
+        }, 500);
     </script>
 </body>
 </html>
