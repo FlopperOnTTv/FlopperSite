@@ -7,8 +7,50 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css"> 
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="icon" type="image/x-icon" href="images/default.ico">
+
+    <style>
+        /* This ensures the screen isn't white while loading */
+        body { background-color: #000; margin: 0; overflow: hidden; }
+
+        #overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: black; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; 
+            cursor: pointer;
+            color: white;
+            font-family: Arial, sans-serif;
+            transition: opacity 0.5s ease;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+
+        video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        /* Keep your box hidden until click */
+        #blurred-box {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+    </style>
 </head>
 <body class="custom-cursor">
+
+    <div id="overlay">
+        <div id="enter-text">Click to Enter</div>
+    </div>
 
     <div id="video-background">
         <video id="myVideo" loop playsinline muted>
@@ -20,15 +62,11 @@
         <source src="media/default.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="overlay">
-        <div id="enter-text">Click to Enter</div>
-    </div>
-
-    <div id="blurred-box" style="display: none;">
+    <div id="blurred-box">
         <img src="images/default.jpg" alt="Profile Picture">
-        <p id="username">flopper</p>
+        <p id="username" style="color: white; font-weight: bold; font-size: large;">flopper</p>
         <div class="user-description">
-            <p id="user-description">i do cool shi</p>
+            <p id="user-description" style="color: white;">i do cool shi</p>
         </div>
         <div class="links">
             <a href="https://discordlookup.com/user/1079429643070873740" target="_blank"><i class="fab fa-discord"></i></a> 
@@ -37,7 +75,52 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById("myAudio");
+            const video = document.getElementById("myVideo");
+            const overlay = document.getElementById("overlay");
+            const box = document.getElementById("blurred-box");
+            const enterText = document.getElementById("enter-text");
+            let dotCount = 0;
+
+            audio.volume = 0.2;
+
+            // Dot Animation
+            setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                enterText.textContent = `Click to Enter${'.'.repeat(dotCount)}`;
+            }, 500);
+
+            // THE MAIN FIX: Click logic
+            overlay.addEventListener('click', function() {
+                // 1. Play both (no promise checks to keep it simple)
+                video.play();
+                audio.play();
+                
+                // 2. Fade out overlay
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    // 3. Show the content
+                    box.style.opacity = '1';
+                }, 500);
+            });
+
+            // Visibility fix
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    video.pause();
+                    audio.pause();
+                } else if (overlay.style.display === 'none') {
+                    video.play();
+                    audio.play();
+                }
+            });
+        });
+    </script>
+    
     <script src="js/title.js"></script>
+
 </body>
 </html>
