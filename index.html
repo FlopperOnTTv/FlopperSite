@@ -4,49 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flopper</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css"> 
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="icon" type="image/x-icon" href="images/default.ico">
 
     <style>
-        /* This ensures the screen isn't white while loading */
-        body { background-color: #000; margin: 0; overflow: hidden; }
+        /* 1. THE FOUNDATION - No more white screens */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Force black background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: white;
+        }
 
+        /* 2. THE OVERLAY - High Z-index so you can actually click it */
         #overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: black; 
+            background-color: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999; 
+            z-index: 10000;
             cursor: pointer;
-            color: white;
-            font-family: Arial, sans-serif;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease;
         }
 
+        #enter-text {
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* 3. THE VIDEO - Covers everything behind the box */
         #video-background {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -1;
+            z-index: 1;
         }
 
         video {
             width: 100%; height: 100%;
             object-fit: cover;
+            opacity: 0.6; /* Makes it look cleaner/darker */
         }
 
-        /* Keep your box hidden until click */
+        /* 4. THE COOL SHI - Floating/Drifting Profile Box */
         #blurred-box {
-            opacity: 0;
-            transition: opacity 1s ease;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            opacity: 0; /* Starts invisible */
+            transition: opacity 1.5s ease;
+            
+            /* The Animation */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+            33% { transform: translate(-50%, -50%) translateY(-15px) rotate(1deg); }
+            66% { transform: translate(-50%, -50%) translateY(5px) rotate(-1deg); }
+            100% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+        }
+
+        #blurred-box img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .links a:hover {
+            color: #aaa;
+            text-shadow: 0 0 10px white;
         }
     </style>
 </head>
-<body class="custom-cursor">
+<body>
 
     <div id="overlay">
         <div id="enter-text">Click to Enter</div>
@@ -64,9 +123,9 @@
 
     <div id="blurred-box">
         <img src="images/default.jpg" alt="Profile Picture">
-        <p id="username" style="color: white; font-weight: bold; font-size: large;">flopper</p>
+        <p id="username" style="font-weight: bold; font-size: 1.5rem; margin-bottom: 5px;">flopper</p>
         <div class="user-description">
-            <p id="user-description" style="color: white;">i do cool shi</p>
+            <p style="color: #ccc; margin-bottom: 20px;">i do cool shi</p>
         </div>
         <div class="links">
             <a href="https://discordlookup.com/user/1079429643070873740" target="_blank"><i class="fab fa-discord"></i></a> 
@@ -84,30 +143,31 @@
             const enterText = document.getElementById("enter-text");
             let dotCount = 0;
 
+            // 1. Initial Setup
             audio.volume = 0.2;
 
-            // Dot Animation
+            // 2. Animated Dots
             setInterval(() => {
                 dotCount = (dotCount + 1) % 4;
                 enterText.textContent = `Click to Enter${'.'.repeat(dotCount)}`;
             }, 500);
 
-            // THE MAIN FIX: Click logic
+            // 3. The Big Moment: Click to Start
             overlay.addEventListener('click', function() {
-                // 1. Play both (no promise checks to keep it simple)
-                video.play();
-                audio.play();
+                // Play media (Crucial: Video starts muted to ensure it plays, we can unmute it if needed)
+                video.play().catch(e => console.log("Video Play Error:", e));
+                audio.play().catch(e => console.log("Audio Play Error:", e));
                 
-                // 2. Fade out overlay
+                // Hide overlay
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
-                    // 3. Show the content
+                    // Reveal the profile box with a fade
                     box.style.opacity = '1';
-                }, 500);
+                }, 800);
             });
 
-            // Visibility fix
+            // 4. Tab Visibility Fix (Pause when switching tabs)
             document.addEventListener("visibilitychange", () => {
                 if (document.hidden) {
                     video.pause();
@@ -119,8 +179,5 @@
             });
         });
     </script>
-    
-    <script src="js/title.js"></script>
-
 </body>
 </html>
