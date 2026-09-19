@@ -1,1 +1,1 @@
-if you can't make a site for yourself and need to copy mine for some reason atleast gimmie a star and maybe a follow , thanks flppr.xyz
+site will get updated but i might keep the old source code here , going to be hosting it through cloudflare. flppr.xyz
